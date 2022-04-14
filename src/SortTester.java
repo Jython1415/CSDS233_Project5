@@ -10,7 +10,7 @@ public class SortTester {
      * @param length the length of the array
      * @return an array of ascending integers
      */
-    private static int[] ascendingArray(int start, int length) {
+    public static int[] ascendingArray(int start, int length) {
         int[] result = new int[length];
         
         for (int i = 0; i < length; i++) {
@@ -26,7 +26,7 @@ public class SortTester {
      * @param length the length of the array
      * @return an array of descending integers
      */
-    private static int[] descendingArray(int start, int length) {
+    public static int[] descendingArray(int start, int length) {
         int[] result = new int[length];
         
         for (int i = 0; i < length; i++) {
@@ -42,7 +42,7 @@ public class SortTester {
      * @param length the length of the array
      * @return an array of the input value 
      */
-    private static int[] repeatingArray(int value, int length) {
+    public static int[] repeatingArray(int value, int length) {
         int[] result = new int[length];
         
         for (int i = 0; i < length; i++) {
@@ -56,7 +56,7 @@ public class SortTester {
      * Swaps 2 random values in the input array
      * @param arr the array to swap values in
      */
-    private static int[] randomSwap(int[] arr) {
+    public static int[] randomSwap(int[] arr) {
         int a = (int)((new Random()).nextDouble() * arr.length);
         int b;
 
@@ -76,7 +76,7 @@ public class SortTester {
      * @param arr the array to randomize
      * @param n the number of random swaps
      */
-    private static int[] randomizeArray(int[] arr, int n) {
+    public static int[] randomizeArray(int[] arr, int n) {
         for (int i = 0; i < n; i++) {
             randomSwap(arr);
         }
