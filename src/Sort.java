@@ -145,7 +145,7 @@ public class Sort {
             return;
         }
 
-        /* this temporary array is necessary for efficiently combining two sorted subarrays
+        /* this temporary array is necessary for efficiently combining two sorted sub-arrays
          * enough space is created to allow for all the recursive calls to reference their part without overlapping */
         int[] temp = new int[arr.length];
 
