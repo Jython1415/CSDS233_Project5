@@ -8,7 +8,7 @@ public class SortTester {
      */
     @Test
     public void testRandomArray() {
-        
+        Assert.assertTrue(true);
     }
 
     /**
