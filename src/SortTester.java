@@ -1,6 +1,7 @@
 import org.junit.Test;
 import org.junit.Assert;
 import java.util.Random;
+import java.util.Arrays;
 
 public class SortTester {
     
@@ -182,6 +183,14 @@ public class SortTester {
         a1 = randomizeArray(ascendingArray(0, 1001), 1001);
         Sort.insertionSort(a1);
         Assert.assertArrayEquals(ascendingArray(0, 1001), a1);
+
+        // large random
+        a1 = Sort.randomArray(1000, -1000, 1000);
+        int[] a2 = a1.clone();
+        Sort.insertionSort(a2);
+        int[] a3 = a1.clone();
+        Arrays.sort(a3);
+        Assert.assertArrayEquals(a3, a2);
     }
 
     /**
@@ -244,6 +253,14 @@ public class SortTester {
         a1 = randomizeArray(ascendingArray(0, 1001), 1001);
         Sort.quickSort(a1);
         Assert.assertArrayEquals(ascendingArray(0, 1001), a1);
+
+        // large random
+        a1 = Sort.randomArray(1000, -1000, 1000);
+        int[] a2 = a1.clone();
+        Sort.quickSort(a2);
+        int[] a3 = a1.clone();
+        Arrays.sort(a3);
+        Assert.assertArrayEquals(a3, a2);
     }
 
     /**
@@ -306,6 +323,14 @@ public class SortTester {
         a1 = randomizeArray(ascendingArray(0, 1001), 1001);
         Sort.mergeSort(a1);
         Assert.assertArrayEquals(ascendingArray(0, 1001), a1);
+
+        // large random
+        a1 = Sort.randomArray(1000, -1000, 1000);
+        int[] a2 = a1.clone();
+        Sort.mergeSort(a2);
+        int[] a3 = a1.clone();
+        Arrays.sort(a3);
+        Assert.assertArrayEquals(a3, a2);
     }
 
     /**
@@ -368,5 +393,13 @@ public class SortTester {
         a1 = randomizeArray(ascendingArray(0, 1001), 1001);
         Sort.bubbleSort(a1);
         Assert.assertArrayEquals(ascendingArray(0, 1001), a1);
+
+        // large random
+        a1 = Sort.randomArray(1000, -1000, 1000);
+        int[] a2 = a1.clone();
+        Sort.bubbleSort(a2);
+        int[] a3 = a1.clone();
+        Arrays.sort(a3);
+        Assert.assertArrayEquals(a3, a2);
     }
 }
