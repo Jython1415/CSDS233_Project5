@@ -109,7 +109,53 @@ public class Sort {
      * @param arr the array to sort
      */
     public static void mergeSort(int[] arr) {
+        if (arr == null) {
+            return;
+        }
 
+        int[] temp = new int[arr.length];
+
+        mSort(arr, temp, 0, arr.length - 1);
+    }
+
+    private static void mSort(int[] arr, int[] temp, int start, int end) {
+        if (end <= start) {
+            return;
+        }
+        
+        int split = (start + end) / 2;
+
+        mSort(arr, temp, start, split);
+        mSort(arr, temp, split + 1, end);
+
+        // merge the two halves
+        merge(arr, temp, start, split, split + 1, end);
+    }
+
+    private static void merge(int[] arr, int[] temp, int leftStart, int leftEnd, int rightStart, int rightEnd) {
+        // merge
+        int i = leftStart;
+        int j = rightStart;
+        int k = leftStart;
+        while (i <= leftEnd && j <= rightEnd) {
+            if (arr[i] < arr[j]) {
+                temp[k++] = arr[i++];
+            }
+            else {
+                temp[k++] = arr[j++];
+            }
+        }
+        while (i <= leftEnd) {
+            temp[k++] = arr[i++];
+        }
+        while (j <= rightEnd) {
+            temp[k++] = arr[j++];
+        }
+
+        // copy back
+        for (int l = 0; l < rightEnd + 1; l++) {
+            arr[l] = temp[l];
+        }
     }
 
     /**
