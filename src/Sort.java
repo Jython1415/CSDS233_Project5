@@ -319,7 +319,7 @@ public class Sort {
      * Main method to demonstrate the functionality of all the methods
      */
     public static void main(String[] args) throws Exception {
-        if (args[0].equals("benchmark")) {
+        if (args.length >= 1 && args[0].equals("benchmark")) {
             benchmark();
         }
         else {
@@ -327,13 +327,13 @@ public class Sort {
 
             System.out.println("Create a new random array using Sort.randomArray(20, 1, 10)");
 
-            int[] array = Sort.randomArray(20, 1, 10);
+            int[] a1 = Sort.randomArray(20, 1, 10);
 
             System.out.print("[");
-            for (int i = 0; i < array.length - 1; i++) {
-                System.out.print(array[i] + ", ");
+            for (int i = 0; i < a1.length - 1; i++) {
+                System.out.print(a1[i] + ", ");
             }
-            System.out.print(array[array.length - 1] + "]\n\n");
+            System.out.print(a1[a1.length - 1] + "]\n\n");
 
             String[] methodNames = new String[]{"insertionSort", "quickSort", "mergeSort", "bubbleSort", "javaSort"};
 
@@ -344,12 +344,12 @@ public class Sort {
                 method.setAccessible(true);
     
                 System.out.print("Unsorted: [");
-                for (int i = 0; i < array.length - 1; i++) {
-                    System.out.print(array[i] + ", ");
+                for (int i = 0; i < a1.length - 1; i++) {
+                    System.out.print(a1[i] + ", ");
                 }
-                System.out.print(array[array.length - 1] + "]\n");
+                System.out.print(a1[a1.length - 1] + "]\n");
 
-                int[] copy = array.clone();
+                int[] copy = a1.clone();
                 method.invoke(null, copy);
                 System.out.println("sorting with " + methodName + "...");
 
