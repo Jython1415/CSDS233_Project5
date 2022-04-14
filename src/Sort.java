@@ -350,14 +350,18 @@ public class Sort {
                 System.out.print(a1[a1.length - 1] + "]\n");
 
                 int[] copy = a1.clone();
+
+                long start = System.nanoTime();
                 method.invoke(null, copy);
+                long time = System.nanoTime() - start;
                 System.out.println("sorting with " + methodName + "...");
 
                 System.out.print("Sorted: [");
                 for (int i = 0; i < copy.length - 1; i++) {
                     System.out.print(copy[i] + ", ");
                 }
-                System.out.print(copy[copy.length - 1] + "]\n\n");
+                System.out.print(copy[copy.length - 1] + "]\n");
+                System.out.println("Took " + Long.toString(time) + " nano seconds\n");
             }
         }
     }
