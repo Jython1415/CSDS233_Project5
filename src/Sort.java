@@ -284,13 +284,11 @@ public class Sort {
             System.out.println("");
         }
 
-        // print out as csv
+        // create csv for exporting
         
         File resultsFile = new File("benchmarking.csv");
         resultsFile.createNewFile();
         CSVWriter csvWriter = new CSVWriter(new FileWriter(resultsFile));
-
-        // CSVWriter csvWriter = new CSVWriter(new FileWriter(Files.createFile(Paths.get("/benchmarking.csv")).toString()));
         
         String[] nextLine;
 
