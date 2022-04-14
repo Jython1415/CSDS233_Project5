@@ -365,7 +365,7 @@ public class Sort {
             }
 
             System.out.println("DEMONSTRATION OVER");
-            System.out.println("For more detailed timings, run Sort with \"benchmark\" as the first argumgent and see the generated csv file");
+            System.out.println("For more detailed timings, run Sort with \"benchmark\" as the first argument and see the generated csv file");
         }
     }
 }
