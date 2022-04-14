@@ -323,7 +323,42 @@ public class Sort {
             benchmark();
         }
         else {
+            System.out.println("DEMONSTRATION\n");
 
+            System.out.println("Create a new random array using Sort.randomArray(20, 1, 10)");
+
+            int[] array = Sort.randomArray(20, 1, 10);
+
+            System.out.print("[");
+            for (int i = 0; i < array.length - 1; i++) {
+                System.out.print(array[i] + ", ");
+            }
+            System.out.print(array[array.length - 1] + "]\n\n");
+
+            String[] methodNames = new String[]{"insertionSort", "quickSort", "mergeSort", "bubbleSort", "javaSort"};
+
+            for (String methodName : methodNames) {    
+                System.out.println("---------- Sort with " + methodName + " ----------");
+
+                Method method = Sort.class.getDeclaredMethod(methodName, int[].class);
+                method.setAccessible(true);
+    
+                System.out.print("Unsorted: [");
+                for (int i = 0; i < array.length - 1; i++) {
+                    System.out.print(array[i] + ", ");
+                }
+                System.out.print(array[array.length - 1] + "]\n");
+
+                int[] copy = array.clone();
+                method.invoke(null, copy);
+                System.out.println("sorting with " + methodName + "...");
+
+                System.out.print("Sorted: [");
+                for (int i = 0; i < copy.length - 1; i++) {
+                    System.out.print(copy[i] + ", ");
+                }
+                System.out.print(copy[copy.length - 1] + "]\n\n");
+            }
         }
     }
 }
