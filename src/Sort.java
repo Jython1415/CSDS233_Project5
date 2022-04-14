@@ -363,6 +363,9 @@ public class Sort {
                 System.out.print(copy[copy.length - 1] + "]\n");
                 System.out.println("Took " + Long.toString(time) + " nano seconds\n");
             }
+
+            System.out.println("DEMONSTRATION OVER");
+            System.out.println("For more detailed timings, run Sort with \"benchmark\" as the first argumgent and see the generated csv file");
         }
     }
 }
