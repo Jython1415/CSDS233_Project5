@@ -313,6 +313,60 @@ public class SortTester {
      */
     @Test
     public void testBubbleSort() {
+        int[] a1;
+        
+        // null
+        a1 = null;
+        Sort.bubbleSort(a1);
+        Assert.assertArrayEquals(null, a1);
+        
+        // length 0
+        a1 = new int[0];
+        Sort.bubbleSort(a1);
+        Assert.assertArrayEquals(new int[0], a1);
 
+        // length 1
+        a1 = new int[]{0};
+        Sort.bubbleSort(a1);
+        Assert.assertArrayEquals(new int[]{0}, a1);
+
+        // length 2
+        a1 = new int[]{0, 1};
+        Sort.bubbleSort(a1);
+        Assert.assertArrayEquals(new int[]{0, 1}, a1);
+        a1 = new int[]{1, 0};
+        Sort.bubbleSort(a1);
+        Assert.assertArrayEquals(new int[]{0, 1}, a1);
+        a1 = new int[]{0, 0};
+        Sort.bubbleSort(a1);
+        Assert.assertArrayEquals(new int[]{0, 0}, a1);
+
+        // large even length - ascending, descending, repeated, and randomized
+        a1 = ascendingArray(0, 1000);
+        Sort.bubbleSort(a1);
+        Assert.assertArrayEquals(ascendingArray(0, 1000), a1);
+        a1 = descendingArray(999, 1000);
+        Sort.bubbleSort(a1);
+        Assert.assertArrayEquals(ascendingArray(0, 1000), a1);
+        a1 = repeatingArray(0, 1000);
+        Sort.bubbleSort(a1);
+        Assert.assertArrayEquals(repeatingArray(0, 1000), a1);
+        a1 = randomizeArray(ascendingArray(0, 1000), 1000);
+        Sort.bubbleSort(a1);
+        Assert.assertArrayEquals(ascendingArray(0, 1000), a1);
+
+        // large odd length - ascending, descending, repeated, and randomized
+        a1 = ascendingArray(0, 1001);
+        Sort.bubbleSort(a1);
+        Assert.assertArrayEquals(ascendingArray(0, 1001), a1);
+        a1 = descendingArray(1000, 1001);
+        Sort.bubbleSort(a1);
+        Assert.assertArrayEquals(ascendingArray(0, 1001), a1);
+        a1 = repeatingArray(0, 1001);
+        Sort.bubbleSort(a1);
+        Assert.assertArrayEquals(repeatingArray(0, 1001), a1);
+        a1 = randomizeArray(ascendingArray(0, 1001), 1001);
+        Sort.bubbleSort(a1);
+        Assert.assertArrayEquals(ascendingArray(0, 1001), a1);
     }
 }
