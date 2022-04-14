@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class Sort {
 
     /**
@@ -8,7 +10,17 @@ public class Sort {
      * @return an int[] of random integers
      */
     public static int[] randomArray(int n, int a, int b) {
-        return new int[0];
+        if (b < a) {
+            return new int[0];
+        }
+
+        int[] result = new int[n];
+        
+        for (int i = 0; i < n; i++) {
+            result[i] = a + (int)((new Random()).nextDouble() * (b - a));
+        }
+
+        return result;
     }
 
     /**
