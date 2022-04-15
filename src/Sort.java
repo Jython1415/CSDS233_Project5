@@ -243,32 +243,43 @@ public class Sort {
         int[] sizes = new int[]{10, 20, 50, 100, 200, 500, 1000, 2000, 5000};
         int repetitions = 100;
 
-        Hashtable<String, ArrayList<Long>> results = new Hashtable<String, ArrayList<Long>>();
+        Hashtable<String, ArrayList<ArrayList<Long>>> results = new Hashtable<String, ArrayList<ArrayList<Long>>>(sizes.length);
 
         // time all methods
         for (String methodName : methodNames) {
-            results.put(methodName, new ArrayList<Long>());
+            results.put(methodName, new ArrayList<ArrayList<Long>>(sizes.length));
 
             Method method = Sort.class.getDeclaredMethod(methodName, int[].class);
             method.setAccessible(true);
 
-            for (int size : sizes) {
-                long totalTime = 0L;
+            for (int i = 0; i < sizes.length; i++) {
+                int size = sizes[i];
+
+                results.get(methodName).add(new ArrayList<Long>());
+                for (int j = 0; j < 4; j++) {
+                    results.get(methodName).get(i).add(0L);  
+                }
                 
-                for (int i = 0; i < repetitions; i++) {
+                for (int j = 0; j < repetitions; j++) {
                     int[] a1 = Sort.randomArray(size, 0, 100);
-                    long start;
+                    int[] a2 = SortTester.ascendingArray(0, size);
+                    int[] a3 = SortTester.descendingArray(size - 1, size);
+                    int[] a4 = SortTester.randomizeArray(SortTester.ascendingArray(0, size), (int)Math.ceil(size / (double)10)); // 10% mixed
+                    int[][] arrays = new int[][]{a1, a2, a3, a4};
                     long time;
-
-                    start = System.nanoTime();
-                    method.invoke(null, a1);
-                    time = System.nanoTime() - start;
-
-                    totalTime += time;
+                    
+                    for (int k = 0; k < arrays.length; k++) {
+                        long start;
+                        start = System.nanoTime();
+                        method.invoke(null, a1);
+                        time = System.nanoTime() - start;
+                        results.get(methodName).get(i).set(k, results.get(methodName).get(i).get(k) + time);
+                    }
                 }
 
-                long averageTime = totalTime / repetitions;
-                results.get(methodName).add(averageTime);
+                for (int k = 0; k < results.get(methodName).get(i).size(); k++) {
+                    results.get(methodName).get(i).set(k, results.get(methodName).get(i).get(k) / repetitions);
+                }
             }
         }
 
@@ -285,33 +296,45 @@ public class Sort {
         }
 
         // create csv for exporting
-        
         File resultsFile = new File("benchmarking.csv");
         resultsFile.createNewFile();
         CSVWriter csvWriter = new CSVWriter(new FileWriter(resultsFile));
         
         String[] nextLine;
 
-        nextLine = new String[sizes.length + 1];
-        for (int i = 0; i < sizes.length; i++) {
-            nextLine[i + 1] = Integer.toString(sizes[i]);
-        }
-        csvWriter.writeNext(nextLine);
+        for (int i = 0; i < 4; i++) {
 
-        for (String methodName : methodNames) {
             nextLine = new String[sizes.length + 1];
-
-            nextLine[0] = methodName;
-
-            ArrayList<Long> resultsList = results.get(methodName);
-
-            for (int i = 0; i < resultsList.size(); i++) {
-                nextLine[i + 1] = Long.toString(resultsList.get(i));
+            nextLine[0] = Integer.toString(i);
+            for (int j = 1; j < sizes.length; j++) {
+                nextLine[j] = "";
             }
+            csvWriter.writeNext(nextLine);
 
+            nextLine = new String[sizes.length + 1];
+            for (int j = 0; j < sizes.length; j++) {
+                nextLine[j + 1] = Integer.toString(sizes[j]);
+            }
+            csvWriter.writeNext(nextLine);
+
+            for (String methodName : methodNames) {
+                nextLine = new String[sizes.length + 1];
+
+                nextLine[0] = methodName;
+
+                for (int k = 0; k < sizes.length; k++) {
+                    nextLine[k + 1] = Long.toString(results.get(methodName).get(k).get(i));
+                }
+
+                csvWriter.writeNext(nextLine);
+            }
+            
+            nextLine = new String[sizes.length + 1];
+            for (int j = 0; j < sizes.length; j++) {
+                nextLine[j] = "";
+            }
             csvWriter.writeNext(nextLine);
         }
-        
         csvWriter.close();
     }
 
